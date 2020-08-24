@@ -1,28 +1,12 @@
-## Workflow
+## States Cursor
 
-> A project template based on TypeScript, React, immer, emotion, rex, ruled-router...
+> An alternative for Respo cursor.
 
-### Usage
+States in React components are reset during Webpack how code replacement. Respo cursor proposed a solution by maintaining a global states tree and using manual states passing to hold states. This library tries to offer a alternative library for use case in React.
 
-Dev:
+### Usages
 
-```bash
-yarn dll
-yarn dev
-```
-
-Compile library:
-
-```bash
-yarn compile
-```
-
-Release:
-
-```bash
-yarn release
-# yarn serve
-```
+_TODO_
 
 ### Workflow
 

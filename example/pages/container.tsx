@@ -8,7 +8,7 @@ import { ISidebarEntry, DocSidebar } from "@jimengio/doc-frame";
 
 let items: ISidebarEntry[] = [
   {
-    title: "Intro",
+    title: "Home",
     path: genRouter.$.name,
   },
 ];
@@ -37,7 +37,7 @@ let Container: FC<{ router: GenRouterTypeMain }> = React.memo((props) => {
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
       <DocSidebar
-        title="Workflow"
+        title="States cursor"
         currentPath={props.router.name}
         onSwitch={(item) => {
           onSwitchPage(item.path);
