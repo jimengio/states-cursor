@@ -5,6 +5,8 @@ import { fullscreen, row, expand } from "@jimengio/flex-styles";
 import { HashRedirect, findRouteTarget } from "@jimengio/ruled-router/lib/dom";
 import { genRouter, GenRouterTypeMain } from "controller/generated-router";
 import { ISidebarEntry, DocSidebar } from "@jimengio/doc-frame";
+import { StatesCursor } from "../../src/states-cursor";
+import PageHome from "./home";
 
 let items: ISidebarEntry[] = [
   {
@@ -13,16 +15,6 @@ let items: ISidebarEntry[] = [
   },
 ];
 
-const renderChildPage = (routerTree: GenRouterTypeMain) => {
-  switch (routerTree?.name) {
-    case "home":
-    default:
-      return <HashRedirect to={genRouter.$.path()} noDelay />;
-  }
-
-  return <div>NOTHING</div>;
-};
-
 let onSwitchPage = (path: string) => {
   let target = findRouteTarget(genRouter, path);
   if (target != null) {
@@ -30,10 +22,22 @@ let onSwitchPage = (path: string) => {
   }
 };
 
-let Container: FC<{ router: GenRouterTypeMain }> = React.memo((props) => {
+let Container: FC<{ router: GenRouterTypeMain; cursor: StatesCursor }> = React.memo((props) => {
   /** Methods */
   /** Effects */
   /** Renderers */
+
+  const renderChildPage = () => {
+    switch (props.router?.name) {
+      case "home":
+        return <PageHome cursor={props.cursor.extends("home")} />;
+      default:
+        return <HashRedirect to={genRouter.$.path()} noDelay />;
+    }
+
+    return <div>NOTHING</div>;
+  };
+
   return (
     <div className={cx(fullscreen, row, styleContainer)}>
       <DocSidebar
@@ -44,7 +48,7 @@ let Container: FC<{ router: GenRouterTypeMain }> = React.memo((props) => {
         }}
         items={items}
       />
-      <div className={cx(expand, styleBody)}>{renderChildPage(props.router)}</div>
+      <div className={cx(expand, styleBody)}>{renderChildPage()}</div>
     </div>
   );
 });
